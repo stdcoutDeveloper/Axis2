@@ -1,0 +1,41 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  
+  <parent>
+    <groupId>com.dev</groupId>
+    <artifactId>hi-soap</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  
+  <artifactId>service</artifactId>
+  
+  <build>
+  	<plugins>
+  		<plugin>
+  			<groupId>org.apache.maven.plugins</groupId>
+  			<artifactId>maven-antrun-plugin</artifactId>
+	        <version>1.8</version>
+	        <executions>
+	        	<execution>
+            		<id>zip-artifacts</id>
+		            <phase>package</phase>
+		            <goals>
+		                <goal>run</goal>
+		            </goals>
+		            <configuration>
+		                <target>
+		                	<mkdir dir="target/build" />
+		                	
+		                    <copy file="src/META-INF/services.xml" tofile="target/build/META-INF/services.xml" overwrite="true" />
+
+							<javac srcdir="src/main/java" destdir="target/build" />
+					
+							<jar basedir="target/build" destfile="target/hi.aar" />
+		                </target>
+		            </configuration>
+          		</execution>
+	        </executions>
+  		</plugin>
+  	</plugins>
+  </build>
+</project>

@@ -1,0 +1,32 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  
+  <parent>
+    <groupId>com.dev</groupId>
+    <artifactId>hi-soap</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  
+  <artifactId>client-axis2</artifactId>
+  
+  <dependencies>
+  	<!-- axis2 version 1.8.0 -->
+	<dependency>
+	    <groupId>org.apache.axis2</groupId>
+	    <artifactId>axis2-adb</artifactId>
+	    <version>1.8.0</version> 
+	</dependency>
+	
+	<!-- runtime required (transport) -->
+	<dependency>
+	    <groupId>org.apache.axis2</groupId>
+	    <artifactId>axis2-transport-local</artifactId>
+	    <version>1.8.0</version>
+	</dependency>
+	<dependency>
+	    <groupId>org.apache.axis2</groupId>
+	    <artifactId>axis2-transport-http</artifactId>
+	    <version>1.8.0</version>
+	</dependency>
+  </dependencies>
+</project>

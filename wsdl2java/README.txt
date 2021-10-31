@@ -1,0 +1,1 @@
+%AXIS2_HOME%\bin\WSDL2Java -uri HiService.wsdl -p hi.hiClient -d adb -s

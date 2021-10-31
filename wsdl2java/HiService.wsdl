@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns="http://hello" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://org.apache.axis2/xsd" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" targetNamespace="http://hello">
+    <wsdl:types>
+        <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://hello">
+            <xs:element name="echo">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="args0" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="echoResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="echoRequest">
+        <wsdl:part name="parameters" element="ns:echo"/>
+    </wsdl:message>
+    <wsdl:message name="echoResponse">
+        <wsdl:part name="parameters" element="ns:echoResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="hiPortType">
+        <wsdl:operation name="echo">
+            <wsdl:input message="ns:echoRequest" wsaw:Action="urn:echo"/>
+            <wsdl:output message="ns:echoResponse" wsaw:Action="urn:echoResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="hiSoap11Binding" type="ns:hiPortType">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="echo">
+            <soap:operation soapAction="urn:echo" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="hiSoap12Binding" type="ns:hiPortType">
+        <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="echo">
+            <soap12:operation soapAction="urn:echo" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="hiHttpBinding" type="ns:hiPortType">
+        <http:binding verb="POST"/>
+        <wsdl:operation name="echo">
+            <http:operation location="echo"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="hi">
+        <wsdl:port name="hiHttpSoap11Endpoint" binding="ns:hiSoap11Binding">
+            <soap:address location="http://localhost:8080/axis2/services/hi.hiHttpSoap11Endpoint/"/>
+        </wsdl:port>
+        <wsdl:port name="hiHttpSoap12Endpoint" binding="ns:hiSoap12Binding">
+            <soap12:address location="http://localhost:8080/axis2/services/hi.hiHttpSoap12Endpoint/"/>
+        </wsdl:port>
+        <wsdl:port name="hiHttpEndpoint" binding="ns:hiHttpBinding">
+            <http:address location="http://localhost:8080/axis2/services/hi.hiHttpEndpoint/"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="maven-antrun-" default="main"  >
+<target name="main">
+  <mkdir dir="target/build"/>
+  <copy file="src/META-INF/services.xml" tofile="target/build/META-INF/services.xml" overwrite="true"/>
+  <javac destdir="target/build" srcdir="src/main/java"/>
+  <jar basedir="target/build" destfile="target/hi.aar"/>
+</target>
+</project>
